@@ -4,96 +4,577 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bhavnagar Blood Connect</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@400;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         * {
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Hind Vadodara', 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s ease;
         }
 
         body {
-            background-color: #f4f6f9;
-            color: #333;
+            background-color: #f7f9fc;
+            color: #2b2b2b;
             line-height: 1.6;
         }
 
-        /* Header & Language Bar */
+        /* Header & Navigation */
         header {
-            background: linear-gradient(135deg, #c0392b, #8e44ad);
-            color: white;
-            padding: 15px 20px;
+            background: #ffffff;
+            padding: 12px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            position: relative;
-        }
-
-        .header-title h1 {
-            font-size: 24px;
-        }
-
-        .header-title p {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        /* Language Toggle Button */
-        .lang-switch-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid white;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            backdrop-filter: blur(5px);
-        }
-
-        .lang-switch-btn:hover {
-            background: white;
-            color: #c0392b;
-            transform: scale(1.05);
-        }
-
-        /* Navigation Bar */
-        nav {
-            background-color: #2c3e50;
-            display: flex;
-            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-logo img {
+            height: 38px;
+            width: auto;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-logo h1 {
+            font-size: 22px;
+            color: #d9383a;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.3px;
+        }
+
+        .brand-logo span.sub-title {
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* ==================== ATTRACTIVE BOUNCY NAVIGATION ==================== */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         nav a {
-            color: #ecf0f1;
-            padding: 14px 18px;
+            position: relative;
+            color: #4a4a4a;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             cursor: pointer;
+            padding: 10px 18px;
+            border-radius: 25px; /* Pill shape */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            z-index: 1;
         }
 
-        nav a:hover, nav a.active {
-            color: #fff;
-            background-color: #e74c3c;
+        /* The hidden bouncy background */
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #d9383a 0%, #b82b2d 100%);
+            z-index: -1;
+            border-radius: 25px;
+            opacity: 0;
+            transform: scale(0.5); /* Start small */
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Elastic Bounce */
+        }
+
+        /* Hover effect (Light background, slight lift) */
+        nav a:hover {
+            color: #d9383a;
+            background-color: #fff0f1;
             transform: translateY(-2px);
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1000px;
-            margin: 25px auto;
-            padding: 0 15px;
-            min-height: 70vh;
+        nav a:hover::before {
+            opacity: 0; /* Keep it hidden on normal hover */
         }
 
-        /* Page Section Animation */
+        /* Active/Selected effect (Bouncy bubble fill) */
+        nav a.active {
+            color: #ffffff;
+            background-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(217, 56, 58, 0.25);
+        }
+
+        nav a.active::before {
+            opacity: 1;
+            transform: scale(1); /* Bounce to full size */
+        }
+
+        /* Click Squish Effect */
+        nav a:active {
+            transform: scale(0.9);
+            box-shadow: 0 2px 5px rgba(217, 56, 58, 0.2);
+        }
+
+        /* Language Button Squish & Bounce */
+        .lang-switch-btn {
+            background: transparent;
+            border: 2px solid #d9383a;
+            color: #d9383a;
+            padding: 8px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .lang-switch-btn:hover {
+            background: #d9383a;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(217, 56, 58, 0.25);
+        }
+
+        .lang-switch-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* WELCOME POPUP MODAL STYLES */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(3px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .welcome-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 16px;
+            box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.25);
+            position: relative;
+            text-align: center;
+            padding: 30px 25px;
+            border: 3px solid #d9383a;
+            animation: popupScale 0.3s ease-in-out;
+        }
+
+        @keyframes popupScale {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-welcome-btn {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            background: #f1f1f1;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+        }
+        .close-welcome-btn:hover {
+            background: #d9383a;
+            color: #ffffff;
+        }
+
+        .heart-icon {
+            font-size: 45px;
+            color: #d9383a;
+            margin-bottom: 10px;
+        }
+
+        .welcome-card h2 {
+            color: #d9383a;
+            margin: 0 0 10px 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .welcome-card p.tagline {
+            color: #333333;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 10px 0 20px 0;
+            font-weight: 500;
+        }
+
+        .thanks-box {
+            background: #fff0f1;
+            border-radius: 8px;
+            padding: 10px;
+            color: #d9383a;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px dashed #d9383a;
+        }
+
+        /* ==================== ATTRACTIVE SERVICE MODAL ==================== */
+        .service-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .service-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .service-modal-card {
+            background: #ffffff;
+            width: 90%;
+            max-width: 480px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transform: translateY(40px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .service-modal-overlay.active .service-modal-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .close-service-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 22px;
+            color: #333;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: 0.3s;
+        }
+
+        .close-service-btn:hover {
+            background: #d9383a;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .service-modal-header {
+            position: relative;
+            height: 200px;
+        }
+
+        .service-modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-modal-badge {
+            position: absolute;
+            bottom: -16px;
+            left: 25px;
+            background: #d9383a;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: 0 6px 15px rgba(217, 56, 58, 0.4);
+            border: 3px solid #fff;
+        }
+
+        .service-modal-body {
+            padding: 35px 25px 25px;
+        }
+
+        .service-modal-body h2 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .service-modal-body .sm-desc {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 500;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 15px;
+        }
+
+        .sm-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sm-list li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            font-size: 14.5px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .sm-list li::before {
+            content: '❤️';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 15px;
+        }
+
+        /* ==================== MEDIUM HEIGHT SLIDER ==================== */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 1250px;
+            margin: 15px auto;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-radius: 14px;
+            background-color: #000000;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 300%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            width: 33.333%;
+            min-height: 360px; 
+            max-height: 380px;
+            position: relative;
+            background-size: cover; 
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .slide-1 {
+            background-image: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.65) 100%), 
+                        url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .slide-2 {
+            background-image: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.7) 100%), 
+                        url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .slide-3 {
+            background-image: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.75) 100%), 
+                        url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1600&q=80');
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            color: #ffffff;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 8px;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: #f0f0f0;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-action {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-action:active {
+            transform: scale(0.92) !important;
+        }
+
+        .btn-primary-red {
+            background-color: #d9383a;
+            color: white;
+            border-color: #d9383a;
+        }
+
+        .btn-primary-red:hover {
+            background-color: #b82b2d;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary-dark {
+            background-color: #ffffff;
+            color: #d9383a;
+            border-color: #ffffff;
+        }
+
+        .btn-secondary-dark:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-red {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outline-red:hover {
+            background-color: white;
+            color: #d9383a;
+            transform: translateY(-2px);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active-dot {
+            background-color: #d9383a;
+            width: 24px;
+            border-radius: 10px;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            font-size: 18px;
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .slider-arrow:hover {
+            background: rgba(217, 56, 58, 0.9);
+        }
+
+        /* General Layout */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
         .page-section {
             display: none;
             animation: fadeIn 0.4s ease-out;
@@ -104,163 +585,555 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Banner with HD Image */
-        .hero-banner {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            margin-bottom: 25px;
-            border-left: 6px solid #e74c3c;
-        }
-
-        .hero-img-container {
-            width: 100%;
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .hero-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .hero-content h2 {
-            color: #c0392b;
-            margin-bottom: 10px;
-        }
-
-        .hero-btns {
-            margin-top: 20px;
-        }
-
-        /* Interactive Buttons */
-        .btn-action {
-            display: inline-block;
-            padding: 12px 24px;
-            margin: 6px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
-        }
-
-        .btn-action:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.5);
-        }
-
-        .btn-action.secondary {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            box-shadow: 0 4px 10px rgba(52, 73, 94, 0.3);
-        }
-
-        .btn-action.secondary:hover {
-            box-shadow: 0 6px 15px rgba(52, 73, 94, 0.5);
-        }
-
-        /* Features Section (3 Image Cards) */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 20px 0 40px 0;
         }
 
         .feature-card {
-            background: white;
-            border-radius: 10px;
+            background: #ffffff;
+            border-radius: 14px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            border: 1px solid #f0e6e4;
+            cursor: pointer;
+            position: relative;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(217, 56, 58, 0.15);
+        }
+
+        .feature-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 190px;
         }
 
         .feature-card img {
             width: 100%;
-            height: 160px;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .feature-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(217, 56, 58, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .feature-card-body {
-            padding: 15px;
+            padding: 20px;
         }
 
         .feature-card-body h3 {
-            color: #2c3e50;
-            font-size: 18px;
+            color: #1a1a1a;
+            font-size: 20px;
             margin-bottom: 8px;
+            font-weight: 700;
         }
 
         .feature-card-body p {
-            font-size: 13px;
+            font-size: 14px;
             color: #666;
+            line-height: 1.5;
+            margin-bottom: 12px;
         }
 
-        /* Interactive Cards */
+        .click-hint {
+            display: inline-block;
+            font-size: 12px;
+            color: #d9383a;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* ==================== PURPOSE SECTION & NEW LINE ART ANIMATION ==================== */
+        .purpose-section {
+            background-color: #fcebe8;
+            padding: 45px 20px;
+            text-align: center;
+            border-radius: 16px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* BLOOD BAG & HEARTBEAT CONTINUOUS LINE ANIMATION */
+        .blood-line-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .blood-line-svg {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+        }
+
+        .line-path {
+            stroke-dasharray: 2500;
+            stroke-dashoffset: 2500;
+            animation: drawContinuousLine 5s ease-in-out infinite;
+        }
+
+        .fluid-fill {
+            opacity: 0;
+            transform-origin: 50% 70%;
+            animation: fillBagFluid 5s ease-in-out infinite;
+        }
+
+        @keyframes drawContinuousLine {
+            0% { stroke-dashoffset: 2500; }
+            45% { stroke-dashoffset: 0; }
+            80% { stroke-dashoffset: 0; } 
+            100% { stroke-dashoffset: 2500; } 
+        }
+
+        @keyframes fillBagFluid {
+            0%, 15% { opacity: 0; transform: scaleY(0); }
+            35% { opacity: 1; transform: scaleY(1); }
+            80% { opacity: 1; transform: scaleY(1); }
+            95%, 100% { opacity: 0; transform: scaleY(0); }
+        }
+
+        .purpose-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1b1f3b;
+            margin-bottom: 30px;
+        }
+
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            text-align: left;
+        }
+
+        .purpose-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s ease;
+        }
+        
+        .purpose-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .purpose-number {
+            font-size: 16px;
+            font-weight: 800;
+            color: #e74c3c;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        /* ==================== INFO & ELIGIBILITY SECTION ==================== */
+        .info-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin: 50px 0;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid #f0e6e4;
+        }
+        .info-img-wrapper {
+            flex: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(217, 56, 58, 0.15);
+            max-height: 350px;
+        }
+        .info-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: 0.5s ease;
+        }
+        .info-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+        .info-content {
+            flex: 1;
+        }
+        .info-content h2 {
+            font-size: 26px;
+            color: #d9383a;
+            margin-bottom: 20px;
+            font-weight: 800;
+            line-height: 1.3;
+        }
+        .info-list {
+            list-style: none;
+        }
+        .info-list li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #444;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .info-list li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            background: #27ae60;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* ==================== PROCESS SECTION ==================== */
+        .process-section {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+        .process-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .process-step {
+            background: #fff;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            border-bottom: 4px solid #d9383a;
+            border-top: 1px solid #f0e6e4;
+            border-left: 1px solid #f0e6e4;
+            border-right: 1px solid #f0e6e4;
+            transition: 0.3s;
+        }
+        .process-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(217, 56, 58, 0.15);
+        }
+        .step-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .step-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #d9383a;
+            margin-bottom: 10px;
+        }
+        .step-desc {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* ==================== NEW: ABOUT US SECTION STYLES ==================== */
+        .about-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 35px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            border: 1px solid #f0e6e4;
+        }
+        .about-image {
+            flex: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(217, 56, 58, 0.12);
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .about-image:hover img {
+            transform: scale(1.06);
+        }
+        .about-content {
+            flex: 1.2;
+        }
+        .about-content h2 {
+            font-size: 28px;
+            color: #d9383a;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        .about-subtitle {
+            font-size: 16px;
+            color: #555;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .about-desc-text {
+            font-size: 15px;
+            color: #4a4a4a;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        .mission-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background: #fff0f1;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #d9383a;
+            margin-bottom: 25px;
+        }
+        .mission-icon {
+            font-size: 30px;
+        }
+        .mission-box h4 {
+            color: #d9383a;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .mission-box p {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .about-stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: #fafafa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #333;
+        }
+
+        /* ==================== GENERAL CARD & FORM STYLES ==================== */
         .card {
             background: white;
             padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            border-radius: 14px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             margin-bottom: 20px;
+            border: 1px solid #f0e6e4;
         }
 
         .card h2 {
-            color: #c0392b;
-            font-size: 22px;
-            border-bottom: 2px solid #f1f1f1;
+            color: #d9383a;
+            font-size: 20px;
+            border-bottom: 2px solid #faf6f5;
             padding-bottom: 10px;
+            margin-bottom: 18px;
+        }
+
+        /* ==================== ATTRACTIVE CAMP CARDS ==================== */
+        .camp-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .camp-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid #f0e6e4;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .camp-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(217, 56, 58, 0.15);
+            border-color: #d9383a;
+        }
+
+        .camp-card-header {
+            background: linear-gradient(135deg, #d9383a 0%, #b82b2d 100%);
+            color: white;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .camp-org {
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 65%;
+        }
+
+        .camp-date-badge {
+            background: rgba(255, 255, 255, 0.25);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .camp-card-body {
+            padding: 22px;
+        }
+
+        .camp-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .camp-detail-icon {
+            font-size: 18px;
+            background: #fff0f1;
+            padding: 6px;
+            border-radius: 8px;
+            color: #d9383a;
+        }
+
+        .camp-card-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 2px dashed #f0e6e4;
+        }
+
+        .btn-call-camp {
+            flex: 1;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-call-camp:hover { 
+            background: #219653; 
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-call-camp:active {
+            transform: scale(0.95);
+        }
+
+        .btn-delete-camp {
+            background: #ffebeb;
+            color: #e74c3c;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .btn-delete-camp:hover {
+            background: #e74c3c;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
             margin-bottom: 15px;
         }
 
-        /* Red Cross Card */
         .redcross-card {
             border: 2px solid #e74c3c;
-            background: #fff8f8;
-            border-radius: 12px;
+            background: #fffafa;
+            border-radius: 14px;
             padding: 25px;
         }
 
         .redcross-header {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 15px;
             border-bottom: 1px solid #f2d6d6;
-            padding-bottom: 15px;
+            padding-bottom: 12px;
         }
 
         .redcross-img-logo {
-            width: 80px;
+            width: 50px;
             height: auto;
-            object-fit: contain;
         }
 
-        .redcross-info p {
-            margin-bottom: 10px;
-            font-size: 15px;
-        }
-
-        /* Form Controls */
         .form-group {
             margin-bottom: 15px;
         }
@@ -268,195 +1141,510 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            font-weight: 600;
             font-size: 14px;
         }
 
-        .form-group input:focus, .form-group select:focus {
-            border-color: #e74c3c;
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fafafa;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: #d9383a;
+            background: #fff;
             outline: none;
-            box-shadow: 0 0 8px rgba(231, 76, 60, 0.2);
+            box-shadow: 0 0 6px rgba(217, 56, 58, 0.15);
         }
 
         .btn-submit {
-            background: linear-gradient(135deg, #27ae60, #2ea043);
+            background: #d9383a;
             color: white;
             border: none;
             padding: 12px;
             width: 100%;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+            transition: all 0.3s ease;
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4);
+            background: #b82b2d;
+            box-shadow: 0 4px 15px rgba(217, 56, 58, 0.3);
+        }
+        
+        .btn-submit:active {
+            transform: scale(0.95);
         }
 
-        /* Donor Table */
+        /* Donor Table CSS */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
         .donor-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .donor-table th, .donor-table td {
             border: 1px solid #eee;
-            padding: 12px;
+            padding: 10px 12px;
             text-align: left;
+            font-size: 14px;
         }
 
-        .donor-table tr:hover {
-            background-color: #fff5f5;
+        .donor-table th {
+            background-color: #fcfcfc;
+            color: #555;
         }
 
         .blood-badge {
-            background-color: #e74c3c;
+            background-color: #d9383a;
             color: white;
-            padding: 4px 10px;
-            border-radius: 15px;
+            padding: 3px 8px;
+            border-radius: 12px;
             font-weight: bold;
+            font-size: 12px;
         }
 
         .call-btn {
             background-color: #27ae60;
             color: white;
             text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 13px;
-            display: inline-block;
-        }
-
-        .call-btn:hover {
-            transform: scale(1.08);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .delete-btn {
             background-color: #e74c3c;
             color: white;
             border: none;
-            padding: 6px 10px;
-            border-radius: 4px;
+            padding: 5px 8px;
+            border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
             font-weight: bold;
             margin-left: 5px;
         }
 
-        .delete-btn:hover {
-            background-color: #c0392b;
-        }
-
-        /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
-            background: #2c3e50;
-            color: white;
+            padding: 25px 20px;
+            background: #141414;
+            color: #999;
             margin-top: 40px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px;
+            }
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+            .slide {
+                min-height: 320px;
+            }
+            .hero-title {
+                font-size: 22px;
+            }
+            .hero-subtitle {
+                font-size: 13px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+            }
+            .btn-action {
+                width: 100%;
+            }
+            .info-section {
+                flex-direction: column;
+            }
+            .about-wrapper {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Section -->
-    <header>
-        <div class="header-title">
-            <h1>🩸 Bhavnagar Blood Connect</h1>
-            <p id="sub-title">ભાવનગર માટે ડિજિટલ રક્તદાન સેવા પોર્ટલ</p>
+    <!-- WELCOME POPUP MODAL -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="welcome-card">
+            <button class="close-welcome-btn" onclick="closeWelcomeModal()">&times;</button>
+            <div class="heart-icon">🩸</div>
+            <h2 id="modal-title">Bhavnagar Blood Connect</h2>
+            <p class="tagline" id="modal-tagline">
+                "એક નાનું રક્તદાન, કોઈના માટે મોટું જીવનદાન બની શકે છે. આપના સપોર્ટથી આજે જ કોઈકની જિંદગી બચાવો!"
+            </p>
+            <div class="thanks-box" id="modal-thanks">
+                ❤️ Thanks for Visiting Our Website ❤️
+            </div>
         </div>
-        <!-- Language Switcher -->
+    </div>
+
+    <!-- ATTRACTIVE SERVICE DETAIL MODAL -->
+    <div class="service-modal-overlay" id="serviceModal">
+        <div class="service-modal-card">
+            <button class="close-service-btn" onclick="closeServiceModal()">&times;</button>
+            
+            <div class="service-modal-header">
+                <img id="sm-image" src="" alt="Service Image">
+                <span class="service-modal-badge" id="sm-badge"></span>
+            </div>
+            
+            <div class="service-modal-body">
+                <h2 id="sm-title">Title</h2>
+                <p class="sm-desc" id="sm-desc">Description</p>
+                <ul class="sm-list" id="sm-list">
+                    <!-- Data will be injected here via JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <a href="#" class="brand-logo" onclick="showPage('home')">
+            <svg width="32" height="38" viewBox="0 0 32 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 0C16 0 0 16 0 25C0 32.18 7.16 38 16 38C24.84 38 32 32.18 32 25C32 16 16 0 16 0Z" fill="#D9383A"/>
+            </svg>
+            <div class="brand-text">
+                <h1>Bhavnagar Blood Connect</h1>
+                <span class="sub-title" id="brand-sub">ભાવનગર બ્લડ કનેક્ટ</span>
+            </div>
+        </a>
+        
+        <nav>
+            <a onclick="showPage('home')" id="nav-home" class="active">હોમ</a>
+            <a onclick="showPage('camp')" id="nav-camp">કેમ્પ આયોજન</a>
+            <a onclick="showPage('donors')" id="nav-donors">ડોનર શોધો</a>
+            <a onclick="showPage('register')" id="nav-register">ડોનર બનો</a>
+            <a onclick="showPage('about')" id="nav-about">અમારા વિશે</a>
+            <a onclick="showPage('contact')" id="nav-contact">સંપર્ક કરો</a>
+        </nav>
+
         <button class="lang-switch-btn" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
-        <a onclick="showPage('register')" id="nav-register">Become a Donor</a>
-        <a onclick="showPage('donors')" id="nav-donors">Find Donors</a>
-        <a onclick="showPage('about')" id="nav-about">About Us</a>
-        <a onclick="showPage('contact')" id="nav-contact">Contact Us</a>
-    </nav>
-
-    <div class="container">
-
-        <!-- 1. HOME PAGE SECTION -->
-        <div id="home" class="page-section active-section">
+    <div id="home" class="page-section active-section">
+        
+        <!-- MEDIUM SIZE HERO SLIDER -->
+        <div class="slider-container">
+            <button class="slider-arrow prev-arrow" onclick="moveSlide(-1)">❮</button>
+            <button class="slider-arrow next-arrow" onclick="moveSlide(1)">❯</button>
             
-            <!-- Hero Banner with HD Image -->
-            <div class="hero-banner">
-                <div class="hero-img-container">
-                    <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1200&q=80" alt="Blood Donation Banner">
-                </div>
-                <div class="hero-content">
-                    <h2 id="hero-title">તમારું એક રક્તદાન કોઈનો જીવ બચાવી શકે છે ❤️</h2>
-                    <p id="hero-desc">આપાતકાલીન સ્થિતિમાં દર્દીઓ અને સ્વૈચ્છિક રક્તદાતાઓ વચ્ચેનો એક ડિજિટલ સેતુ.</p>
-                    <div class="hero-btns">
-                        <button class="btn-action" onclick="showPage('donors')" id="btn-search">🔍 બ્લડ ડોનર શોધો</button>
-                        <button class="btn-action secondary" onclick="showPage('register')" id="btn-reg">📝 રક્તદાતા બનવા રજીસ્ટર કરો</button>
+            <div class="slides-wrapper" id="slidesWrapper">
+                
+                <!-- Slide 1 -->
+                <div class="slide slide-1">
+                    <div class="hero-content">
+                        <h1 class="hero-title" id="hero-title-1">બ્લડ ડોનેશન કેમ્પનું આયોજન કરો</h1>
+                        <p class="hero-subtitle" id="hero-subtitle-1">ભાવનગરમાં સ્વૈચ્છિક રક્તદાન કેમ્પનું નિર્માણ કરો</p>
+                        <div class="hero-buttons">
+                            <button class="btn-action btn-primary-red" onclick="showPage('camp')" id="btn-hero-camp">🏥 કેમ્પનું આયોજન કરો</button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Slide 2 -->
+                <div class="slide slide-2">
+                    <div class="hero-content">
+                        <h1 class="hero-title" id="hero-title-2">ઈમરજન્સીમાં રક્તદાતા શોધો</h1>
+                        <p class="hero-subtitle" id="hero-subtitle-2">ભાવનગરના સ્થાનિક ડોનર્સ સાથે તાત્કાલિક સંપર્ક કરો</p>
+                        <div class="hero-buttons">
+                            <button class="btn-action btn-secondary-dark" onclick="showPage('donors')" id="btn-hero-find">🔍 ડોનર શોધો</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide slide-3">
+                    <div class="hero-content">
+                        <h1 class="hero-title" id="hero-title-3">રક્તદાન કરી જીવનદાતા બનો</h1>
+                        <p class="hero-subtitle" id="hero-subtitle-3">તમારું ૧ યુનિટ રક્ત ૩ જરૂરિયાતમંદનો જીવ બચાવશે</p>
+                        <div class="hero-buttons">
+                            <button class="btn-action btn-outline-red" onclick="showPage('register')" id="btn-hero-reg">📝 ડોનર બનો</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Visual Info Cards with Images -->
-            <div class="features-grid">
-                <div class="feature-card">
-                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=500&q=80" alt="Save Lives">
-                    <div class="feature-card-body">
-                        <h3 id="card1-title">જીવન રક્ષા (Save Lives)</h3>
-                        <p id="card1-desc">તમારું ૧ યુનિટ રક્ત ૩ જરૂરિયાતમંદ વ્યક્તિઓનો જીવ બચાવી શકે છે.</p>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?auto=format&fit=crop&w=500&q=80" alt="Quick Connect">
-                    <div class="feature-card-body">
-                        <h3 id="card2-title">ઝડપી સંપર્ક (Quick Connect)</h3>
-                        <p id="card2-desc">ભાવનગરના નજીકના વિસ્તારોમાંથી ઈમરજન્સીમાં ડોનરનો સીધો સંપર્ક કરો.</p>
-                    </div>
-                </div>
-
-                <div class="feature-card">
-                    <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=500&q=80" alt="Health Benefits">
-                    <div class="feature-card-body">
-                        <h3 id="card3-title">સ્વાસ્થ્ય લાભ (Health Benefits)</h3>
-                        <p id="card3-desc">નિયમિત રક્તદાન કરવાથી શરીરનું બ્લડ સર્ક્યુલેશન અને હૃદયનું સ્વાસ્થ્ય સુંદર રહે છે.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Emergency Helpline Card -->
-            <div class="card">
-                <h2 id="emerg-title">🚨 ઈમરજન્સી હેલ્પલાઇન</h2>
-                <p><strong>Sir T. Hospital (સર ટી. હોસ્પિટલ બ્લડ બેંક):</strong> 0278-2426001</p>
-                <p><strong>Indian Red Cross Society Bhavnagar:</strong> 0278-2512345</p>
+            <div class="slider-dots">
+                <span class="dot active-dot" onclick="setSlide(0)"></span>
+                <span class="dot" onclick="setSlide(1)"></span>
+                <span class="dot" onclick="setSlide(2)"></span>
             </div>
         </div>
 
-        <!-- 2. REGISTER PAGE SECTION -->
-        <div id="register" class="page-section">
+        <div class="container">
+            <!-- SERVICE CARDS -->
+            <div class="features-grid">
+                
+                <div class="feature-card" onclick="openServiceModal('card1')">
+                    <div class="feature-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=600&q=80" alt="Save Lives">
+                        <span class="feature-badge" id="badge-1">જીવનદાન 💡</span>
+                    </div>
+                    <div class="feature-card-body">
+                        <h3 id="card1-title">જીવન રક્ષા</h3>
+                        <p id="card1-desc">તમારું ૧ યુનિટ રક્ત ૩ જરૂરિયાતમંદ દર્દીઓનો જીવ બચાવી શકે છે.</p>
+                        <span class="click-hint" id="hint-1">સંપૂર્ણ વિગત જુઓ 👇</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="openServiceModal('card2')">
+                    <div class="feature-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80" alt="Quick Connect">
+                        <span class="feature-badge" id="badge-2">ઈમરજન્સી ⚡</span>
+                    </div>
+                    <div class="feature-card-body">
+                        <h3 id="card2-title">ઝડપી સંપર્ક</h3>
+                        <p id="card2-desc">ભાવનગરના નજીકના વિસ્તારોમાંથી ઈમરજન્સીમાં ડોનરનો સીધો સંપર્ક કરો.</p>
+                        <span class="click-hint" id="hint-2">સંપૂર્ણ વિગત જુઓ 👇</span>
+                    </div>
+                </div>
+
+                <div class="feature-card" onclick="openServiceModal('card3')">
+                    <div class="feature-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80" alt="Health Benefits">
+                        <span class="feature-badge" id="badge-3">તંદુરસ્તી ❤️</span>
+                    </div>
+                    <div class="feature-card-body">
+                        <h3 id="card3-title">આરોગ્યના ફાયદા</h3>
+                        <p id="card3-desc">નિયમિત રક્તદાન કરવાથી બ્લડ સર્ક્યુલેશન અને હૃદયનું સ્વાસ્થ્ય ઉત્તમ રહે છે.</p>
+                        <span class="click-hint" id="hint-3">સંપૂર્ણ વિગત જુઓ 👇</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PURPOSE SECTION WITH SVG LINE ART ANIMATION -->
+            <div class="purpose-section">
+                
+                <!-- SVG CONTINUOUS LINE ANIMATION -->
+                <div class="blood-line-container">
+                    <svg viewBox="0 0 800 300" class="blood-line-svg">
+                        <!-- Red fluid inside the bag -->
+                        <path class="fluid-fill" d="M 230 110 L 310 110 L 310 170 C 310 210, 230 210, 230 170 Z" fill="#ff5b5b" />
+                        
+                        <!-- Continuous Line Drawing -->
+                        <path class="line-path" d="
+                            M -20 150 
+                            Q 60 110, 120 150 
+                            T 230 150 
+                            L 230 60 
+                            C 230 20, 310 20, 310 60 
+                            L 310 170 
+                            C 310 230, 230 230, 230 170 
+                            L 230 110 
+                            L 310 110 
+                            M 260 204
+                            L 260 225 L 280 225 L 280 204
+                            M 270 225
+                            L 270 260
+                            C 270 320, 340 320, 360 200
+                            L 380 260
+                            L 420 120
+                            Q 480 100, 540 150
+                            T 680 150
+                            T 820 150
+                        " fill="none" stroke="#2c3e50" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+
+                <h2 class="purpose-title" id="purpose-title-text">ઉદ્દેશ્યથી પ્રેરિત. કરુણાથી એકત્રિત.<br>પ્રભાવ પર ધ્યાન કેન્દ્રિત.</h2>
+                <div class="purpose-grid">
+                    <div class="purpose-card">
+                        <span class="purpose-number">01</span>
+                        <h3 id="p1-title">સ્વાર્થ વગર સેવા</h3>
+                        <p id="p1-desc">યુવાનો અને સમાજના લોકોને સ્વાર્થ વગર રક્તદાન માટે પ્રોત્સાહિત કરી સામાજિક જવાબદારી ઉભી કરવી.</p>
+                    </div>
+
+                    <div class="purpose-card">
+                        <span class="purpose-number">02</span>
+                        <h3 id="p2-title">સક્રિયતા દ્વારા જાગરૂકતા</h3>
+                        <p id="p2-desc">જાગરૂકતા અભિયાન અને બ્લડ કેમ્પ દ્વારા રક્તદાન અંગેના ભ્રમો દૂર કરવા અને નિયમિત રક્તદાન વધારવું.</p>
+                    </div>
+
+                    <div class="purpose-card">
+                        <span class="purpose-number">03</span>
+                        <h3 id="p3-title">સમુદાય-સંચાલિત પ્રભાવ</h3>
+                        <p id="p3-desc">હોસ્પિટલો અને સ્થાનિક સમુદાયો સાથે મળીને કાયમી ધોરણે રક્તની અછત દૂર થાય તેવું આયોજન કરવું.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INFO & ELIGIBILITY SECTION -->
+            <div class="info-section">
+                <div class="info-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1615461066159-fea0960485d5?auto=format&fit=crop&w=800&q=80" alt="Who can donate blood">
+                </div>
+                <div class="info-content">
+                    <h2 id="eligibility-title">રક્તદાન કોણ કરી શકે?</h2>
+                    <ul class="info-list">
+                        <li id="eli-1">કોઈપણ સ્વસ્થ વ્યક્તિ જેની ઉંમર ૧૮ થી ૬૫ વર્ષની વચ્ચે હોય.</li>
+                        <li id="eli-2">વ્યક્તિનું વજન ઓછામાં ઓછું ૪૫ કિલો (45 kg) હોવું જરૂરી છે.</li>
+                        <li id="eli-3">હીમોગ્લોબિન (Hb) નું પ્રમાણ ૧૨.૫ ગ્રામ (12.5 g/dl) કે તેથી વધુ હોવું જોઈએ.</li>
+                        <li id="eli-4">છેલ્લા ૩ મહિનામાં કોઈ મોટું ઓપરેશન, બીમારી કે રક્તદાન ન કર્યું હોય.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- DONATION PROCESS -->
+            <div class="process-section">
+                <h2 class="process-title" id="process-title">રક્તદાનની સરળ પ્રક્રિયા</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-icon">📝</div>
+                        <h3 class="step-title" id="step1-title">૧. રજીસ્ટ્રેશન</h3>
+                        <p class="step-desc" id="step1-desc">તમારી પ્રાથમિક વિગતો સાથેનું ફોર્મ ભરો.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🩺</div>
+                        <h3 class="step-title" id="step2-title">૨. આરોગ્ય તપાસ</h3>
+                        <p class="step-desc" id="step2-desc">વજન, બ્લડ પ્રેશર (BP) અને હીમોગ્લોબિનની સામાન્ય તપાસ.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🩸</div>
+                        <h3 class="step-title" id="step3-title">૩. રક્તદાન</h3>
+                        <p class="step-desc" id="step3-desc">સુરક્ષિત રીતે માત્ર ૧૦-૧૫ મિનિટમાં રક્તદાન પૂર્ણ.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-icon">🧃</div>
+                        <h3 class="step-title" id="step4-title">૪. આરામ અને નાસ્તો</h3>
+                        <p class="step-desc" id="step4-desc">રક્તદાન પછી ૫ મિનિટ આરામ કરો અને પૌષ્ટિક નાસ્તો લો.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- END CONTAINER -->
+    </div> <!-- END HOME PAGE SECTION -->
+
+    <!-- ================= OTHER PAGES (CAMP, DONORS, ABOUT, ETC) ================= -->
+    <div class="container">
+
+        <!-- CAMP SECTION -->
+        <div id="camp" class="page-section">
             <div class="card">
-                <h2 id="reg-form-title">📝 રક્તદાતા રજિસ્ટ્રેશન (Donor Registration)</h2>
-                <form id="donorForm">
+                <h2 id="camp-form-title">🏥 બ્લડ ડોનેશન કેમ્પ રજીસ્ટ્રેશન</h2>
+                <form id="campForm">
                     <div class="form-group">
-                        <label id="lbl-name">પૂરું નામ (Full Name in English):</label>
-                        <input type="text" id="fullName" placeholder="e.g. Ankit Trivedi (Only English)" pattern="[A-Za-z\s]+" title="Please enter name in English letters only" required>
+                        <label id="lbl-org-name">આયોજક / સંસ્થાનું નામ:</label>
+                        <input type="text" id="orgName" placeholder="દા.ત. લાયન્સ ક્લબ ભાવનગર" required>
                     </div>
                     <div class="form-group">
-                        <label id="lbl-bg">બ્લડ ગ્રુપ (Blood Group):</label>
+                        <label id="lbl-camp-addr">કેમ્પનું સરનામું:</label>
+                        <textarea id="campAddress" rows="3" placeholder="દા.ત. ટાઉન હોલ, વાઘાવાડી રોડ, ભાવનગર" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl-camp-days">કેમ્પ કેટલા દિવસનો છે:</label>
+                        <input type="number" id="campDays" min="1" max="30" placeholder="દા.ત. 1 અથવા 2 દિવસ" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl-camp-date">શરૂ થવાની તારીખ:</label>
+                        <input type="date" id="campDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl-camp-phone">આયોજકનો મોબાઈલ નંબર:</label>
+                        <input type="tel" id="campPhone" placeholder="10 અંકનો નંબર" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl-camp-pin">ડીલીટ કરવા માટે સિક્રેટ PIN (4 અંક):</label>
+                        <input type="password" id="campPin" placeholder="દા.ત. 1234" pattern="[0-9]{4}" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="btn-submit" id="btn-submit-camp">કેમ્પ પબ્લિશ કરો</button>
+                </form>
+            </div>
+
+            <!-- CAMP LIST -->
+            <div class="card">
+                <h2 id="camp-list-title">📅 આગામી બ્લડ કેમ્પની યાદી</h2>
+                <div id="campCardsGrid" class="camp-cards-grid"></div>
+            </div>
+        </div>
+
+        <!-- FIND DONORS SECTION -->
+        <div id="donors" class="page-section">
+            <div class="card">
+                <h2 id="find-title">🔍 રક્તદાતાઓની યાદી</h2>
+                
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label id="lbl-filter">બ્લડ ગ્રુપ પ્રમાણે ફિલ્ટર કરો:</label>
+                        <select id="searchBlood" onchange="filterDonors()">
+                            <option value="ALL" id="opt-all">બધા બ્લડ ગ્રુપ (All Groups)</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label id="lbl-filter-area">વિસ્તાર પ્રમાણે ફિલ્ટર કરો:</label>
+                        <select id="searchArea" onchange="filterDonors()">
+                            <option value="ALL" id="opt-all-area">બધા વિસ્તાર (All Areas)</option>
+                            <option value="કાળિયાબીડ">કાળિયાબીડ</option>
+                            <option value="ચિત્રા">ચિત્રા</option>
+                            <option value="સુભાષનગર">સુભાષનગર</option>
+                            <option value="વાઘાવાડી રોડ">વાઘાવાડી રોડ</option>
+                            <option value="ઘોઘા સર્કલ">ઘોઘા સર્કલ</option>
+                            <option value="અન્ય / આસપાસનો વિસ્તાર">અન્ય / આસપાસનો વિસ્તાર</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="donor-table">
+                        <thead>
+                            <tr>
+                                <th id="th-name">નામ</th>
+                                <th id="th-group">ગ્રુપ</th>
+                                <th id="th-area">વિસ્તાર</th>
+                                <th id="th-contact">સંપર્ક / એક્શન</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donorListTable"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- REGISTER DONOR SECTION -->
+        <div id="register" class="page-section">
+            <div class="card">
+                <h2 id="reg-form-title">📝 રક્તદાતા રજિસ્ટ્રેશન</h2>
+                <form id="donorForm">
+                    <div class="form-group">
+                        <label id="lbl-name">પૂરું નામ:</label>
+                        <input type="text" id="fullName" placeholder="દા.ત. અંકિત ત્રિવેદી" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl-bg">બ્લડ ગ્રુપ:</label>
                         <select id="bloodGroup" required>
-                            <option value="">-- સિલેક્ટ કરો --</option>
+                            <option value="" id="opt-select-bg">-- સિલેક્ટ કરો --</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
                             <option value="B+">B+</option>
@@ -468,72 +1656,71 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label id="lbl-area">ભાવનગરનો વિસ્તાર (Area):</label>
-                        <select id="area" required>
-                            <option value="">-- વિસ્તાર સિલેક્ટ કરો --</option>
-                            <option value="Kaliyabid">કાળિયાબીડ (Kaliyabid)</option>
-                            <option value="Chitra">ચિત્રા (Chitra)</option>
-                            <option value="Subhashnagar">સુભાષનગર (Subhashnagar)</option>
-                            <option value="Waghawadi Road">વાઘાવાડી રોડ (Waghawadi Road)</option>
-                            <option value="Ghogha Circle">ઘોઘા સર્કલ (Ghogha Circle)</option>
-                            <option value="Other">અન્ય / આસપાસનો વિસ્તાર</option>
+                        <label id="lbl-area">ભાવનગરનો વિસ્તાર:</label>
+                        <!-- ADDED onchange EVENT HERE -->
+                        <select id="area" required onchange="handleAreaChange()">
+                            <option value="" id="opt-select-area">-- વિસ્તાર સિલેક્ટ કરો --</option>
+                            <option value="કાળિયાબીડ" id="area-1">કાળિયાબીડ</option>
+                            <option value="ચિત્રા" id="area-2">ચિત્રા</option>
+                            <option value="સુભાષનગર" id="area-3">સુભાષનગર</option>
+                            <option value="વાઘાવાડી રોડ" id="area-4">વાઘાવાડી રોડ</option>
+                            <option value="ઘોઘા સર્કલ" id="area-5">ઘોઘા સર્કલ</option>
+                            <option value="અન્ય / આસપાસનો વિસ્તાર" id="area-6">અન્ય / આસપાસનો વિસ્તાર</option>
                         </select>
+                        <!-- NEW CUSTOM AREA INPUT -->
+                        <input type="text" id="customArea" style="display: none; margin-top: 10px;" placeholder="તમારો વિસ્તાર લખો (દા.ત. સિહોર)">
                     </div>
                     <div class="form-group">
-                        <label id="lbl-phone">મોબાઈલ નંબર (Mobile No):</label>
+                        <label id="lbl-phone">મોબાઈલ નંબર:</label>
                         <input type="tel" id="phone" placeholder="10 અંકનો નંબર" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl-pin">ડીલીટ કરવા માટે સિક્રેટ PIN (4 અંક):</label>
+                        <input type="password" id="donorPin" placeholder="દા.ત. 1234" pattern="[0-9]{4}" maxlength="4" required>
                     </div>
                     <button type="submit" class="btn-submit" id="btn-submit-reg">રજીસ્ટર કરો</button>
                 </form>
             </div>
         </div>
 
-        <!-- 3. FIND DONORS PAGE SECTION -->
-        <div id="donors" class="page-section">
-            <div class="card">
-                <h2 id="find-title">🔍 રક્તદાતાઓની યાદી (Search Blood Donors)</h2>
-                <div class="form-group">
-                    <label id="lbl-filter">બ્લડ ગ્રુપ પ્રમાણે ફિલ્ટર કરો:</label>
-                    <select id="searchBlood" onchange="filterDonors()">
-                        <option value="ALL">બધા બ્લડ ગ્રુપ (All Groups)</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                    </select>
-                </div>
-
-                <table class="donor-table">
-                    <thead>
-                        <tr>
-                            <th id="th-name">નામ</th>
-                            <th id="th-group">ગ્રુપ</th>
-                            <th id="th-area">વિસ્તાર</th>
-                            <th id="th-contact">સંપર્ક / એક્શન</th>
-                        </tr>
-                    </thead>
-                    <tbody id="donorListTable">
-                        <!-- JS ડેટા -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 4. ABOUT US PAGE SECTION -->
+        <!-- NEW ATTRACTIVE ABOUT US SECTION -->
         <div id="about" class="page-section">
-            <div class="card">
-                <h2 id="about-title">ℹ️ અમારા વિશે (About Bhavnagar Blood Connect)</h2>
-                <p id="about-desc">ભાવનગર બ્લડ કનેક્ટ એ ભાવનગર શહેર અને આસપાસના વિસ્તારોમાં તાત્કાલિક રક્તની જરૂરિયાત પૂરી પાડવા માટે સમર્પિત એક ડિજિટલ પ્લેટફોર્મ છે.</p>
-                <br>
-                <p id="about-mission"><strong>અમારો હેતુ:</strong> Emergency ના સમયે દર્દીના સંબંધીઓને સરળતાથી અને ઝડપથી બ્લડ ડોનર મળી રહે તે માટે એક સુરક્ષિત અને ઝડપી સેવા પૂરું પાડવું.</p>
+            <div class="about-wrapper">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1536856136534-bb679c52a9aa?auto=format&fit=crop&w=800&q=80" alt="About Bhavnagar Blood Connect">
+                </div>
+                <div class="about-content">
+                    <h2 id="about-title">ℹ️ અમારા વિશે</h2>
+                    <h3 class="about-subtitle" id="about-subtitle">ભાવનગર માટે એક આશાનું કિરણ</h3>
+                    <p class="about-desc-text" id="about-desc">ભાવનગર બ્લડ કનેક્ટ એ ભાવનગર શહેર અને આસપાસના વિસ્તારોમાં તાત્કાલિક રક્તની જરૂરિયાત પૂરી પાડવા માટે સમર્પિત એક નિઃશુલ્ક ડિજિટલ પ્લેટફોર્મ છે. અમે દર્દીઓ અને રક્તદાતાઓ વચ્ચે એક મજબૂત સેતુ બનાવવાનું કાર્ય કરીએ છીએ.</p>
+                    
+                    <div class="mission-box">
+                        <div class="mission-icon">🎯</div>
+                        <div>
+                            <h4 id="mission-heading">અમારો હેતુ (Mission)</h4>
+                            <p id="about-mission">ઈમરજન્સીના સમયે દર્દીના સંબંધીઓને સરળતાથી અને ઝડપથી બ્લડ ડોનર મળી રહે તેમજ કેમ્પ આયોજકો સીધા લોકો સુધી પહોંચી શકે.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-icon">✅</span>
+                            <span id="stat-1">વેરિફાઇડ ડોનર્સ</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">⚡</span>
+                            <span id="stat-2">ઝડપી સંપર્ક</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">🆓</span>
+                            <span id="stat-3">૧૦૦% નિઃશુલ્ક</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- 5. CONTACT US PAGE SECTION -->
+        <!-- CONTACT US SECTION -->
         <div id="contact" class="page-section">
             <div class="redcross-card">
                 <div class="redcross-header">
@@ -543,10 +1730,10 @@
                         <p style="font-size: 14px; color: #555; font-weight: bold;">Gujarat State Branch - Bhavnagar Blood Bank</p>
                     </div>
                 </div>
-                <div class="redcross-info">
-                    <p><strong>🏥 સરનામું / Address:</strong> રેડ ક્રોસ ભવન, દીવાનપરા, ભાવનગર (Bhavnagar, Gujarat)</p>
-                    <p><strong>📞 હેલ્પલાઇન / Helpline:</strong> +91 278 2512345 / 2426001</p>
-                    <p><strong>🌐 ઓફિશિયલ પોર્ટલ / Official Website:</strong> <a href="https://redcrossgujarat.org" target="_blank" style="color: #c0392b; font-weight: bold;">redcrossgujarat.org</a></p>
+                <div>
+                    <p id="rc-addr"><strong>🏥 સરનામું:</strong> રેડ ક્રોસ ભવન, દીવાનપરા, ભાવનગર (ગુજરાત)</p>
+                    <p id="rc-phone"><strong>📞 હેલ્પલાઇન:</strong> +91 278 2512345 / 2426001</p>
+                    <p id="rc-portal"><strong>🌐 ઓફિશિયલ પોર્ટલ:</strong> <a href="https://redcrossgujarat.org" target="_blank" style="color: #c0392b; font-weight: bold;">redcrossgujarat.org</a></p>
                 </div>
             </div>
         </div>
@@ -554,100 +1741,419 @@
     </div>
 
     <footer>
-        <p id="footer-text">&copy; Bhavnagar Blood Connect | Empowering Lives Through Donation</p>
+        <p id="footer-text">&copy; Bhavnagar Blood Connect | રક્તદાન દ્વારા જીવન બચાવો</p>
     </footer>
 
-    <!-- JS Logic -->
     <script>
         let currentLang = 'GU';
+        const MASTER_PIN = "9999";
+
+        // LOCAL STORAGE LOAD DATA
+        let donors = JSON.parse(localStorage.getItem('bbc_donors')) || [];
+        let camps = JSON.parse(localStorage.getItem('bbc_camps')) || [];
+
+        function saveData() {
+            localStorage.setItem('bbc_donors', JSON.stringify(donors));
+            localStorage.setItem('bbc_camps', JSON.stringify(camps));
+        }
+
+        // Welcome Modal Functions
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('welcomeModal').classList.add('active');
+            }, 600);
+        });
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').classList.remove('active');
+        }
+
+        // Slider Logic
+        let currentSlide = 0;
+        const slidesCount = 3;
+        let slideInterval = setInterval(autoSlide, 5000);
+
+        function updateSlider() {
+            const wrapper = document.getElementById("slidesWrapper");
+            wrapper.style.transform = `translateX(-${currentSlide * 33.333}%)`;
+            
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.classList.add('active-dot');
+                } else {
+                    dot.classList.remove('active-dot');
+                }
+            });
+        }
+
+        function moveSlide(direction) {
+            currentSlide = (currentSlide + direction + slidesCount) % slidesCount;
+            updateSlider();
+            resetInterval();
+        }
+
+        function setSlide(index) {
+            currentSlide = index;
+            updateSlider();
+            resetInterval();
+        }
+
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % slidesCount;
+            updateSlider();
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(autoSlide, 5000);
+        }
 
         const translations = {
             GU: {
-                subTitle: "ભાવનગર માટે ડિજિટલ રક્તદાન સેવા પોર્ટલ",
-                navHome: "Home",
-                navReg: "Become a Donor",
-                navDonors: "Find Donors",
-                navAbout: "About Us",
-                navContact: "Contact Us",
-                heroTitle: "તમારું એક રક્તદાન કોઈનો જીવ બચાવી શકે છે ❤️",
-                heroDesc: "આપાતકાલીન સ્થિતિમાં દર્દીઓ અને સ્વૈચ્છિક રક્તદાતાઓ વચ્ચેનો એક ડિજિટલ સેતુ.",
-                btnSearch: "🔍 બ્લડ ડોનર શોધો",
-                btnReg: "📝 રક્તદાતા બનવા રજીસ્ટર કરો",
-                card1Title: "જીવન રક્ષા (Save Lives)",
-                card1Desc: "તમારું ૧ યુનિટ રક્ત ૩ જરૂરિયાતમંદ વ્યક્તિઓનો જીવ બચાવી શકે છે.",
-                card2Title: "ઝડપી સંપર્ક (Quick Connect)",
+                modalTagline: '"એક નાનું રક્તદાન, કોઈના માટે મોટું જીવનદાન બની શકે છે. આપના સપોર્ટથી આજે જ કોઈકની જિંદગી બચાવો!"',
+                modalThanks: "❤️ Thanks for Visiting Our Website ❤️",
+                brandSub: "ભાવનગર બ્લડ કનેક્ટ",
+                navHome: "હોમ",
+                navCamp: "કેમ્પ આયોજન",
+                navDonors: "ડોનર શોધો",
+                navReg: "ડોનર બનો",
+                navAbout: "અમારા વિશે",
+                navContact: "સંપર્ક કરો",
+                heroTitle1: "બ્લડ ડોનેશન કેમ્પનું આયોજન કરો",
+                heroSubtitle1: "ભાવનગરમાં સ્વૈચ્છિક રક્તદાન કેમ્પનું નિર્માણ કરો",
+                heroTitle2: "ઈમરજન્સીમાં રક્તદાતા શોધો",
+                heroSubtitle2: "ભાવનગરના સ્થાનિક ડોનર્સ સાથે તાત્કાલિક સંપર્ક કરો",
+                heroTitle3: "રક્તદાન કરી જીવનદાતા બનો",
+                heroSubtitle3: "તમારું ૧ યુનિટ રક્ત ૩ જરૂરિયાતમંદનો જીવ બચાવશે",
+                btnHeroCamp: "🏥 કેમ્પનું આયોજન કરો",
+                btnHeroFind: "🔍 ડોનર શોધો",
+                btnHeroReg: "📝 ડોનર બનો",
+                purposeTitleText: "ઉદ્દેશ્યથી પ્રેરિત. કરુણાથી એકત્રિત.<br>પ્રભાવ પર ધ્યાન કેન્દ્રિત.",
+                p1Title: "સ્વાર્થ વગર સેવા",
+                p1Desc: "યુવાનો અને સમાજના લોકોને સ્વાર્થ વગર રક્તદાન માટે પ્રોત્સાહિત કરી સામાજિક જવાબદારી ઉભી કરવી.",
+                p2Title: "સક્રિયતા દ્વારા જાગરૂકતા",
+                p2Desc: "જાગરૂકતા અભિયાન અને બ્લડ કેમ્પ દ્વારા રક્તદાન અંગેના ભ્રમો દૂર કરવા અને નિયમિત રક્તદાન વધારવું.",
+                p3Title: "સમુદાય-સંચાલિત પ્રભાવ",
+                p3Desc: "હોસ્પિટલો અને સ્થાનિક સમુદાયો સાથે મળીને કાયમી ધોરણે રક્તની અછત દૂર થાય તેવું આયોજન કરવું.",
+                card1Title: "જીવન રક્ષા",
+                card1Desc: "તમારું ૧ યુનિટ રક્ત ૩ જરૂરિયાતમંદ દર્દીઓનો જીવ બચાવી શકે છે.",
+                card2Title: "ઝડપી સંપર્ક",
                 card2Desc: "ભાવનગરના નજીકના વિસ્તારોમાંથી ઈમરજન્સીમાં ડોનરનો સીધો સંપર્ક કરો.",
-                card3Title: "સ્વાસ્થ્ય લાભ (Health Benefits)",
-                card3Desc: "નિયમિત રક્તદાન કરવાથી શરીરનું બ્લડ સર્ક્યુલેશન અને હૃદયનું સ્વાસ્થ્ય સુંદર રહે છે.",
-                emergTitle: "🚨 ઈમરજન્સી હેલ્પલાઇન",
-                regTitle: "📝 રક્તદાતા રજિસ્ટ્રેશન (Donor Registration)",
-                lblName: "પૂરું નામ (Full Name in English):",
-                lblBg: "બ્લડ ગ્રુપ (Blood Group):",
-                lblArea: "ભાવનગરનો વિસ્તાર (Area):",
-                lblPhone: "મોબાઈલ નંબર (Mobile No):",
-                btnSubReg: "રજીસ્ટર કરો",
-                findTitle: "🔍 રક્તદાતાઓની યાદી (Search Blood Donors)",
+                card3Title: "આરોગ્યના ફાયદા",
+                card3Desc: "નિયમિત રક્તદાન કરવાથી બ્લડ સર્ક્યુલેશન અને હૃદયનું સ્વાસ્થ્ય ઉત્તમ રહે છે.",
+                badge1: "જીવનદાન 💡",
+                badge2: "ઈમરજન્સી ⚡",
+                badge3: "તંદુરસ્તી ❤️",
+                hint1: "સંપૂર્ણ વિગત જુઓ 👇",
+                hint2: "સંપૂર્ણ વિગત જુઓ 👇",
+                hint3: "સંપૂર્ણ વિગત જુઓ 👇",
+                c1d1: "રેડ બ્લડ સેલ્સ: એક્સિડન્ટ અને સર્જરીમાં મદદરૂપ.",
+                c1d2: "પ્લેટલેટ્સ: કેન્સર અને ડેન્ગ્યુના દર્દીઓ માટે સંજીવની.",
+                c1d3: "પ્લાઝમા: બર્ન (દાઝેલા) દર્દીઓ માટે અતિ મહત્વનું.",
+                c1d4: "માત્ર ૨૦ મિનિટમાં રક્તદાન પૂરું થાય છે.",
+                c2d1: "કાળિયાબીડ, ચિત્રા, સરતાનપર વગેરે વિસ્તારો કવર્ડ.",
+                c2d2: "કોઈ વચેટિયા વગર સીધો જ બ્લડ ડોનર સાથે સંપર્ક.",
+                c2d3: "૨૪/૭ ભાવનગરના લોકલ ડોનર્સ ઉપલબ્ધ.",
+                c2d4: "દરેક રેર બ્લડ ગ્રુપ (O-, AB-) ની તાત્કાલિક મદદ.",
+                c3d1: "હૃદયરોગ અને એટેકનું જોખમ ૩૩% ઘટે છે.",
+                c3d2: "શરીરમાં નવું અને તાજું રક્ત ઝડપથી બને છે.",
+                c3d3: "ફ્રી હેલ્થ ચેકઅપ (હીમોગ્લોબિન અને બીપી ટેસ્ટ).",
+                c3d4: "કેલરી બર્ન થાય છે અને વજન સંતુલિત રહે છે.",
+                
+                eligibilityTitle: "રક્તદાન કોણ કરી શકે?",
+                eli1: "કોઈપણ સ્વસ્થ વ્યક્તિ જેની ઉંમર ૧૮ થી ૬૫ વર્ષની વચ્ચે હોય.",
+                eli2: "વ્યક્તિનું વજન ઓછામાં ઓછું ૪૫ કિલો (45 kg) હોવું જરૂરી છે.",
+                eli3: "હીમોગ્લોબિન (Hb) નું પ્રમાણ ૧૨.૫ ગ્રામ (12.5 g/dl) કે તેથી વધુ હોવું જોઈએ.",
+                eli4: "છેલ્લા ૩ મહિનામાં કોઈ મોટું ઓપરેશન, બીમારી કે રક્તદાન ન કર્યું હોય.",
+                processTitle: "રક્તદાનની સરળ પ્રક્રિયા",
+                step1Title: "૧. રજીસ્ટ્રેશન",
+                step1Desc: "તમારી પ્રાથમિક વિગતો સાથેનું ફોર્મ ભરો.",
+                step2Title: "૨. આરોગ્ય તપાસ",
+                step2Desc: "વજન, બ્લડ પ્રેશર (BP) અને હીમોગ્લોબિનની સામાન્ય તપાસ.",
+                step3Title: "૩. રક્તદાન",
+                step3Desc: "સુરક્ષિત રીતે માત્ર ૧૦-૧૫ મિનિટમાં રક્તદાન પૂર્ણ.",
+                step4Title: "૪. આરામ અને નાસ્તો",
+                step4Desc: "રક્તદાન પછી ૫ મિનિટ આરામ કરો અને પૌષ્ટિક નાસ્તો લો.",
+                
+                campFormTitle: "🏥 બ્લડ ડોનેશન કેમ્પ રજીસ્ટ્રેશન",
+                lblOrgName: "આયોજક / સંસ્થાનું નામ:",
+                phOrgName: "દા.ત. લાયન્સ ક્લબ ભાવનગર",
+                lblCampAddr: "કેમ્પનું સરનામું:",
+                phCampAddr: "દા.ત. ટાઉન હોલ, વાઘાવાડી રોડ, ભાવનગર",
+                lblCampDays: "કેમ્પ કેટલા દિવસનો છે:",
+                phCampDays: "દા.ત. 1 અથવા 2 દિવસ",
+                lblCampDate: "શરૂ થવાની તારીખ:",
+                lblCampPhone: "આયોજકનો મોબાઈલ નંબર:",
+                phCampPhone: "10 અંકનો નંબર",
+                lblCampPin: "ડીલીટ કરવા માટે સિક્રેટ PIN (4 અંક):",
+                phCampPin: "દા.ત. 1234",
+                btnSubmitCamp: "કેમ્પ પબ્લિશ કરો",
+                campListTitle: "📅 આગામી બ્લડ કેમ્પની યાદી",
+                findTitle: "🔍 રક્તદાતાઓની યાદી",
                 lblFilter: "બ્લડ ગ્રુપ પ્રમાણે ફિલ્ટર કરો:",
+                lblFilterArea: "વિસ્તાર પ્રમાણે ફિલ્ટર કરો:",
+                optAll: "બધા બ્લડ ગ્રુપ (All Groups)",
+                optAllArea: "બધા વિસ્તાર (All Areas)",
                 thName: "નામ",
                 thGroup: "ગ્રુપ",
                 thArea: "વિસ્તાર",
                 thContact: "સંપર્ક / એક્શન",
-                aboutTitle: "ℹ️ અમારા વિશે (About Bhavnagar Blood Connect)",
-                aboutDesc: "ભાવનગર બ્લડ કનેક્ટ એ ભાવનગર શહેર અને આસપાસના વિસ્તારોમાં તાત્કાલિક રક્તની જરૂરિયાત પૂરી પાડવા માટે સમર્પિત એક ડિજિટલ પ્લેટફોર્મ છે.",
-                footerText: "© Bhavnagar Blood Connect | Empowering Lives Through Donation"
+                regFormTitle: "📝 રક્તદાતા રજિસ્ટ્રેશન",
+                lblName: "પૂરું નામ:",
+                phFullName: "દા.ત. અંકિત ત્રિવેદી",
+                lblBg: "બ્લડ ગ્રુપ:",
+                optSelectBg: "-- સિલેક્ટ કરો --",
+                lblArea: "ભાવનગરનો વિસ્તાર:",
+                optSelectArea: "-- વિસ્તાર સિલેક્ટ કરો --",
+                area1: "કાળિયાબીડ",
+                area2: "ચિત્રા",
+                area3: "સુભાષનગર",
+                area4: "વાઘાવાડી રોડ",
+                area5: "ઘોઘા સર્કલ",
+                area6: "અન્ય / આસપાસનો વિસ્તાર",
+                phCustomArea: "તમારો વિસ્તાર લખો (દા.ત. સિહોર)",
+                lblPhone: "મોબાઈલ નંબર:",
+                phPhone: "10 અંકનો નંબર",
+                lblPin: "ડીલીટ કરવા માટે સિક્રેટ PIN (4 અંક):",
+                phDonorPin: "દા.ત. 1234",
+                btnSubmitReg: "રજીસ્ટર કરો",
+                
+                aboutTitle: "ℹ️ અમારા વિશે",
+                aboutSubtitle: "ભાવનગર માટે એક આશાનું કિરણ",
+                aboutDesc: "ભાવનગર બ્લડ કનેક્ટ એ ભાવનગર શહેર અને આસપાસના વિસ્તારોમાં તાત્કાલિક રક્તની જરૂરિયાત પૂરી પાડવા માટે સમર્પિત એક નિઃશુલ્ક ડિજિટલ પ્લેટફોર્મ છે. અમે દર્દીઓ અને રક્તદાતાઓ વચ્ચે એક મજબૂત સેતુ બનાવવાનું કાર્ય કરીએ છીએ.",
+                missionHeading: "અમારો હેતુ (Mission)",
+                aboutMission: "ઈમરજન્સીના સમયે દર્દીના સંબંધીઓને સરળતાથી અને ઝડપથી બ્લડ ડોનર મળી રહે તેમજ કેમ્પ આયોજકો સીધા લોકો સુધી પહોંચી શકે.",
+                stat1: "વેરિફાઇડ ડોનર્સ",
+                stat2: "ઝડપી સંપર્ક",
+                stat3: "૧૦૦% નિઃશુલ્ક",
+                
+                rcAddr: "<strong>🏥 સરનામું:</strong> રેડ ક્રોસ ભવન, દીવાનપરા, ભાવનગર (ગુજરાત)",
+                rcPhone: "<strong>📞 હેલ્પલાઇન:</strong> +91 278 2512345 / 2426001",
+                rcPortal: "<strong>🌐 ઓફિશિયલ પોર્ટલ:</strong> <a href='https://redcrossgujarat.org' target='_blank' style='color: #c0392b; font-weight: bold;'>redcrossgujarat.org</a>",
+                footerText: "© Bhavnagar Blood Connect | રક્તદાન દ્વારા જીવન બચાવો"
             },
             EN: {
-                subTitle: "Digital Blood Donation Portal for Bhavnagar",
+                modalTagline: '"A small blood donation can save a precious life. Support today and save lives!"',
+                modalThanks: "❤️ Thanks for Visiting Our Website ❤️",
+                brandSub: "Bhavnagar Blood Connect",
                 navHome: "Home",
-                navReg: "Become a Donor",
+                navCamp: "Organise Camp",
                 navDonors: "Find Donors",
+                navReg: "Become Donor",
                 navAbout: "About Us",
                 navContact: "Contact Us",
-                heroTitle: "Your Single Blood Donation Can Save a Life ❤️",
-                heroDesc: "A digital bridge connecting patients with voluntary blood donors during emergencies.",
-                btnSearch: "🔍 Find Blood Donors",
-                btnReg: "📝 Register as a Donor",
+                heroTitle1: "Organise a Blood Donation Camp",
+                heroSubtitle1: "Drive voluntary blood donation initiatives across Bhavnagar",
+                heroTitle2: "Find Blood Donors in Emergency",
+                heroSubtitle2: "Connect directly with local verified donors in Bhavnagar",
+                heroTitle3: "Become a Life Saver Today",
+                heroSubtitle3: "Your single unit of blood can save up to 3 precious lives",
+                btnHeroCamp: "🏥 ORGANISE A CAMP",
+                btnHeroFind: "🔍 FIND DONOR",
+                btnHeroReg: "📝 BECOME DONOR",
+                purposeTitleText: "Driven by Purpose. United by Compassion.<br>Focused on Impact.",
+                p1Title: "Service Beyond Self",
+                p1Desc: "We empower young people to transform compassion into meaningful action, making voluntary blood donation a shared social responsibility.",
+                p2Title: "Awareness Through Engagement",
+                p2Desc: "Through campaigns, camps, and open conversations, we dispel myths and encourage more people to donate blood safely and regularly.",
+                p3Title: "Community-Led Impact",
+                p3Desc: "By partnering with students, hospitals, and local communities, we build scalable blood donation initiatives that deliver measurable, lasting change.",
                 card1Title: "Save Lives",
                 card1Desc: "Your 1 unit of blood can save up to 3 lives in critical condition.",
                 card2Title: "Quick Connect",
                 card2Desc: "Directly reach out to nearby donors across Bhavnagar in emergencies.",
                 card3Title: "Health Benefits",
                 card3Desc: "Regular blood donation helps improve blood flow and keeps your heart healthy.",
-                emergTitle: "🚨 Emergency Helpline",
-                regTitle: "📝 Donor Registration",
-                lblName: "Full Name (in English):",
-                lblBg: "Blood Group:",
-                lblArea: "Area in Bhavnagar:",
-                lblPhone: "Mobile Number:",
-                btnSubReg: "Register Now",
-                findTitle: "🔍 List of Blood Donors",
+                badge1: "Lifesaver 💡",
+                badge2: "Emergency ⚡",
+                badge3: "Wellness ❤️",
+                hint1: "Click for details 👇",
+                hint2: "Click for details 👇",
+                hint3: "Click for details 👇",
+                c1d1: "Red Blood Cells: Essential for accidents & surgeries.",
+                c1d2: "Platelets: Lifesaver for Cancer & Dengue patients.",
+                c1d3: "Plasma: Critical for burn victims & trauma.",
+                c1d4: "Donation process completes in just 20 mins.",
+                c2d1: "Covers Kaliyabid, Chitra, Subhashnagar & more.",
+                c2d2: "Direct contact with donors without middlemen.",
+                c2d3: "24/7 availability of local Bhavnagar donors.",
+                c2d4: "Quick availability for rare groups (O-, AB-).",
+                c3d1: "Reduces risk of heart diseases & attacks by 33%.",
+                c3d2: "Stimulates rapid production of fresh blood cells.",
+                c3d3: "Includes free health check-up (Hb & BP).",
+                c3d4: "Helps burn calories and maintain healthy weight.",
+                
+                eligibilityTitle: "Who can donate blood?",
+                eli1: "Any healthy individual between the age of 18 and 65 years.",
+                eli2: "The donor must weigh at least 45 kg (kilograms).",
+                eli3: "Hemoglobin (Hb) level must be 12.5 g/dl or above.",
+                eli4: "No major surgery, illness, or donation in the last 3 months.",
+                processTitle: "Simple Donation Process",
+                step1Title: "1. Registration",
+                step1Desc: "Fill out a quick form with your basic details.",
+                step2Title: "2. Health Check",
+                step2Desc: "Basic screening of weight, Blood Pressure (BP), and Hemoglobin.",
+                step3Title: "3. Donation",
+                step3Desc: "The actual donation process safely completes in 10-15 minutes.",
+                step4Title: "4. Refreshment",
+                step4Desc: "Rest for 5 minutes and enjoy a healthy snack after donating.",
+                
+                campFormTitle: "🏥 Blood Donation Camp Registration",
+                lblOrgName: "Organiser / Organisation Name:",
+                phOrgName: "e.g. Lions Club Bhavnagar",
+                lblCampAddr: "Camp Address:",
+                phCampAddr: "e.g. Town Hall, Waghawadi Road, Bhavnagar",
+                lblCampDays: "Camp Duration (Days):",
+                phCampDays: "e.g. 1 or 2 Days",
+                lblCampDate: "Start Date:",
+                lblCampPhone: "Organiser Mobile Number:",
+                phCampPhone: "10-digit phone number",
+                lblPin: "Secret PIN to Delete (4 digits):",
+                phCampPin: "e.g. 1234",
+                btnSubmitCamp: "Publish Camp",
+                campListTitle: "📅 Upcoming Blood Donation Camps",
+                findTitle: "🔍 Blood Donors List",
                 lblFilter: "Filter by Blood Group:",
+                lblFilterArea: "Filter by Area:",
+                optAll: "All Blood Groups",
+                optAllArea: "All Areas",
                 thName: "Name",
                 thGroup: "Group",
                 thArea: "Area",
                 thContact: "Contact / Action",
-                aboutTitle: "ℹ️ About Us (Bhavnagar Blood Connect)",
-                aboutDesc: "Bhavnagar Blood Connect is a dedicated digital platform to fulfill urgent blood requirements across Bhavnagar city and nearby regions.",
+                regFormTitle: "📝 Blood Donor Registration",
+                lblName: "Full Name:",
+                phFullName: "e.g. Ankit Trivedi",
+                lblBg: "Blood Group:",
+                optSelectBg: "-- Select Group --",
+                lblArea: "Bhavnagar Area:",
+                optSelectArea: "-- Select Area --",
+                area1: "Kaliyabid",
+                area2: "Chitra",
+                area3: "Subhashnagar",
+                area4: "Waghawadi Road",
+                area5: "Ghogha Circle",
+                area6: "Other / Surrounding Area",
+                phCustomArea: "Enter your area (e.g. Sihor)",
+                lblPhone: "Mobile Number:",
+                phPhone: "10-digit number",
+                lblPin: "Secret PIN to Delete (4 digits):",
+                phDonorPin: "e.g. 1234",
+                btnSubmitReg: "Register Now",
+                
+                aboutTitle: "ℹ️ About Us",
+                aboutSubtitle: "A Ray of Hope for Bhavnagar",
+                aboutDesc: "Bhavnagar Blood Connect is a free digital platform dedicated to fulfilling emergency blood requirements across Bhavnagar city and nearby regions. We act as a strong bridge between patients and life-saving blood donors.",
+                missionHeading: "Our Mission",
+                aboutMission: "To quickly connect patients' families with blood donors during emergencies and allow camp organisers to reach out directly to the community.",
+                stat1: "Verified Donors",
+                stat2: "Quick Connect",
+                stat3: "100% Free",
+
+                rcAddr: "<strong>🏥 Address:</strong> Red Cross Bhavan, Diwanpara, Bhavnagar (Gujarat)",
+                rcPhone: "<strong>📞 Helpline:</strong> +91 278 2512345 / 2426001",
+                rcPortal: "<strong>🌐 Official Portal:</strong> <a href='https://redcrossgujarat.org' target='_blank' style='color: #c0392b; font-weight: bold;'>redcrossgujarat.org</a>",
                 footerText: "© Bhavnagar Blood Connect | Empowering Lives Through Donation"
             }
         };
+
+        // Area Change Handler (Show/Hide custom input)
+        function handleAreaChange() {
+            const areaSelect = document.getElementById('area');
+            const customAreaInput = document.getElementById('customArea');
+            
+            // "અન્ય / આસપાસનો વિસ્તાર" remains the fixed underlying value
+            if (areaSelect.value === 'અન્ય / આસપાસનો વિસ્તાર') {
+                customAreaInput.style.display = 'block';
+                customAreaInput.required = true;
+            } else {
+                customAreaInput.style.display = 'none';
+                customAreaInput.required = false;
+                customAreaInput.value = ''; // clear it when hidden
+            }
+        }
+
+        // Open Service Modal
+        function openServiceModal(cardId) {
+            const t = translations[currentLang];
+            const modal = document.getElementById('serviceModal');
+            
+            let title, desc, listItems, imgSrc, badge;
+
+            if (cardId === 'card1') {
+                title = t.card1Title;
+                desc = t.card1Desc;
+                badge = t.badge1;
+                imgSrc = "https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=600&q=80";
+                listItems = [t.c1d1, t.c1d2, t.c1d3, t.c1d4];
+            } else if (cardId === 'card2') {
+                title = t.card2Title;
+                desc = t.card2Desc;
+                badge = t.badge2;
+                imgSrc = "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80";
+                listItems = [t.c2d1, t.c2d2, t.c2d3, t.c2d4];
+            } else if (cardId === 'card3') {
+                title = t.card3Title;
+                desc = t.card3Desc;
+                badge = t.badge3;
+                imgSrc = "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80";
+                listItems = [t.c3d1, t.c3d2, t.c3d3, t.c3d4];
+            }
+
+            document.getElementById('sm-image').src = imgSrc;
+            document.getElementById('sm-badge').innerText = badge;
+            document.getElementById('sm-title').innerText = title;
+            document.getElementById('sm-desc').innerText = desc;
+            
+            const ul = document.getElementById('sm-list');
+            ul.innerHTML = ''; 
+            listItems.forEach(item => {
+                ul.innerHTML += `<li>${item}</li>`;
+            });
+
+            modal.classList.add('active');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+        }
 
         function toggleLanguage() {
             currentLang = (currentLang === 'GU') ? 'EN' : 'GU';
             document.getElementById('langBtn').innerText = (currentLang === 'GU') ? '🌐 English' : '🌐 ગુજરાતી';
 
             const t = translations[currentLang];
-            document.getElementById('sub-title').innerText = t.subTitle;
+            
+            document.getElementById('modal-tagline').innerText = t.modalTagline;
+            document.getElementById('modal-thanks').innerText = t.modalThanks;
+
+            document.getElementById('brand-sub').innerText = t.brandSub;
             document.getElementById('nav-home').innerText = t.navHome;
-            document.getElementById('nav-register').innerText = t.navReg;
+            document.getElementById('nav-camp').innerText = t.navCamp;
             document.getElementById('nav-donors').innerText = t.navDonors;
+            document.getElementById('nav-register').innerText = t.navReg;
             document.getElementById('nav-about').innerText = t.navAbout;
             document.getElementById('nav-contact').innerText = t.navContact;
 
-            document.getElementById('hero-title').innerText = t.heroTitle;
-            document.getElementById('hero-desc').innerText = t.heroDesc;
-            document.getElementById('btn-search').innerText = t.btnSearch;
-            document.getElementById('btn-reg').innerText = t.btnReg;
+            document.getElementById('hero-title-1').innerText = t.heroTitle1;
+            document.getElementById('hero-subtitle-1').innerText = t.heroSubtitle1;
+            document.getElementById('hero-title-2').innerText = t.heroTitle2;
+            document.getElementById('hero-subtitle-2').innerText = t.heroSubtitle2;
+            document.getElementById('hero-title-3').innerText = t.heroTitle3;
+            document.getElementById('hero-subtitle-3').innerText = t.heroSubtitle3;
+
+            document.getElementById('btn-hero-camp').innerText = t.btnHeroCamp;
+            document.getElementById('btn-hero-find').innerText = t.btnHeroFind;
+            document.getElementById('btn-hero-reg').innerText = t.btnHeroReg;
+
+            document.getElementById('purpose-title-text').innerHTML = t.purposeTitleText;
+            document.getElementById('p1-title').innerText = t.p1Title;
+            document.getElementById('p1-desc').innerText = t.p1Desc;
+            document.getElementById('p2-title').innerText = t.p2Title;
+            document.getElementById('p2-desc').innerText = t.p2Desc;
+            document.getElementById('p3-title').innerText = t.p3Title;
+            document.getElementById('p3-desc').innerText = t.p3Desc;
 
             document.getElementById('card1-title').innerText = t.card1Title;
             document.getElementById('card1-desc').innerText = t.card1Desc;
@@ -656,25 +2162,94 @@
             document.getElementById('card3-title').innerText = t.card3Title;
             document.getElementById('card3-desc').innerText = t.card3Desc;
 
-            document.getElementById('emerg-title').innerText = t.emergTitle;
+            document.getElementById('badge-1').innerText = t.badge1;
+            document.getElementById('badge-2').innerText = t.badge2;
+            document.getElementById('badge-3').innerText = t.badge3;
 
-            document.getElementById('reg-form-title').innerText = t.regTitle;
-            document.getElementById('lbl-name').innerText = t.lblName;
-            document.getElementById('lbl-bg').innerText = t.lblBg;
-            document.getElementById('lbl-area').innerText = t.lblArea;
-            document.getElementById('lbl-phone').innerText = t.lblPhone;
-            document.getElementById('btn-submit-reg').innerText = t.btnSubReg;
+            document.getElementById('hint-1').innerText = t.hint1;
+            document.getElementById('hint-2').innerText = t.hint2;
+            document.getElementById('hint-3').innerText = t.hint3;
 
+            document.getElementById('eligibility-title').innerText = t.eligibilityTitle;
+            document.getElementById('eli-1').innerText = t.eli1;
+            document.getElementById('eli-2').innerText = t.eli2;
+            document.getElementById('eli-3').innerText = t.eli3;
+            document.getElementById('eli-4').innerText = t.eli4;
+
+            document.getElementById('process-title').innerText = t.processTitle;
+            document.getElementById('step1-title').innerText = t.step1Title;
+            document.getElementById('step1-desc').innerText = t.step1Desc;
+            document.getElementById('step2-title').innerText = t.step2Title;
+            document.getElementById('step2-desc').innerText = t.step2Desc;
+            document.getElementById('step3-title').innerText = t.step3Title;
+            document.getElementById('step3-desc').innerText = t.step3Desc;
+            document.getElementById('step4-title').innerText = t.step4Title;
+            document.getElementById('step4-desc').innerText = t.step4Desc;
+
+            document.getElementById('camp-form-title').innerText = t.campFormTitle;
+            document.getElementById('lbl-org-name').innerText = t.lblOrgName;
+            document.getElementById('orgName').placeholder = t.phOrgName;
+            document.getElementById('lbl-camp-addr').innerText = t.lblCampAddr;
+            document.getElementById('campAddress').placeholder = t.phCampAddr;
+            document.getElementById('lbl-camp-days').innerText = t.lblCampDays;
+            document.getElementById('campDays').placeholder = t.phCampDays;
+            document.getElementById('lbl-camp-date').innerText = t.lblCampDate;
+            document.getElementById('lbl-camp-phone').innerText = t.lblCampPhone;
+            document.getElementById('campPhone').placeholder = t.phCampPhone;
+            document.getElementById('lbl-camp-pin').innerText = t.lblCampPin;
+            document.getElementById('campPin').placeholder = t.phCampPin;
+            document.getElementById('btn-submit-camp').innerText = t.btnSubmitCamp;
+            document.getElementById('camp-list-title').innerText = t.campListTitle;
+            
             document.getElementById('find-title').innerText = t.findTitle;
             document.getElementById('lbl-filter').innerText = t.lblFilter;
+            document.getElementById('lbl-filter-area').innerText = t.lblFilterArea;
+            document.getElementById('opt-all').innerText = t.optAll;
+            document.getElementById('opt-all-area').innerText = t.optAllArea;
             document.getElementById('th-name').innerText = t.thName;
             document.getElementById('th-group').innerText = t.thGroup;
             document.getElementById('th-area').innerText = t.thArea;
             document.getElementById('th-contact').innerText = t.thContact;
 
+            document.getElementById('reg-form-title').innerText = t.regFormTitle;
+            document.getElementById('lbl-name').innerText = t.lblName;
+            document.getElementById('fullName').placeholder = t.phFullName;
+            document.getElementById('lbl-bg').innerText = t.lblBg;
+            document.getElementById('opt-select-bg').innerText = t.optSelectBg;
+            document.getElementById('lbl-area').innerText = t.lblArea;
+            document.getElementById('opt-select-area').innerText = t.optSelectArea;
+            
+            document.getElementById('area-1').innerText = t.area1;
+            document.getElementById('area-2').innerText = t.area2;
+            document.getElementById('area-3').innerText = t.area3;
+            document.getElementById('area-4').innerText = t.area4;
+            document.getElementById('area-5').innerText = t.area5;
+            document.getElementById('area-6').innerText = t.area6;
+            document.getElementById('customArea').placeholder = t.phCustomArea;
+
+            document.getElementById('lbl-phone').innerText = t.lblPhone;
+            document.getElementById('phone').placeholder = t.phPhone;
+            document.getElementById('lbl-pin').innerText = t.lblPin;
+            document.getElementById('donorPin').placeholder = t.phDonorPin;
+            document.getElementById('btn-submit-reg').innerText = t.btnSubmitReg;
+
             document.getElementById('about-title').innerText = t.aboutTitle;
+            document.getElementById('about-subtitle').innerText = t.aboutSubtitle;
             document.getElementById('about-desc').innerText = t.aboutDesc;
+            document.getElementById('mission-heading').innerText = t.missionHeading;
+            document.getElementById('about-mission').innerHTML = t.aboutMission;
+            document.getElementById('stat-1').innerText = t.stat1;
+            document.getElementById('stat-2').innerText = t.stat2;
+            document.getElementById('stat-3').innerText = t.stat3;
+
+            document.getElementById('rc-addr').innerHTML = t.rcAddr;
+            document.getElementById('rc-phone').innerHTML = t.rcPhone;
+            document.getElementById('rc-portal').innerHTML = t.rcPortal;
+
             document.getElementById('footer-text').innerText = t.footerText;
+
+            filterDonors();
+            displayCamps(); 
         }
 
         function showPage(pageId) {
@@ -685,52 +2260,45 @@
             navLinks.forEach(link => link.classList.remove('active'));
 
             document.getElementById(pageId).classList.add('active-section');
-            document.getElementById('nav-' + pageId).classList.add('active');
-        }
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) activeNav.classList.add('active');
 
-        /* ફેક/સેમ્પલ નામો હટાવી દીધા છે - શરૂઆતમાં ખાલી એરે (Empty Array) રાખ્યો છે */
-        let donors = [];
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function displayDonors(data) {
             const tableBody = document.getElementById("donorListTable");
             tableBody.innerHTML = "";
-
             if (data.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#777; padding: 20px;">હાલમાં કોઈ રક્તદાતા ઉપલબ્ધ નથી. કૃપા કરીને રજીસ્ટ્રેશન કરો.</td></tr>`;
+                const emptyMsg = currentLang === 'GU' ? 'હાલમાં કોઈ રક્તદાતા ઉપલબ્ધ નથી.' : 'No donors registered yet.';
+                tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#777; padding: 20px;">${emptyMsg}</td></tr>`;
                 return;
             }
-
             data.forEach((donor, index) => {
-                const row = `
+                const maskedPhone = "******" + donor.phone.slice(6);
+                tableBody.innerHTML += `
                     <tr>
                         <td><strong>${donor.name}</strong></td>
                         <td><span class="blood-badge">${donor.blood}</span></td>
                         <td>${donor.area}</td>
                         <td>
-                            <a href="tel:${donor.phone}" class="call-btn">📞 ${donor.phone}</a>
-                            <button onclick="removeDonor(${index})" class="delete-btn" title="Remove Registration">🗑️ Remove</button>
+                            <a href="tel:${donor.phone}" class="call-btn">📞 ${maskedPhone}</a>
+                            <button onclick="removeDonor(${index})" class="delete-btn">🗑️ Remove</button>
                         </td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
+                    </tr>`;
             });
         }
 
-        /* સુરક્ષા માટે રજીસ્ટર થયેલા મોબાઈલ નંબરની ચકાસણી કરીને નામ ડિલીટ કરવાનો ફંકશન */
         function removeDonor(index) {
             const donor = donors[index];
-            const confirmPhone = prompt(
-                currentLang === 'GU' 
-                ? `તમારું નામ ટેબલમાંથી હટાવવા માટે તમારો રજીસ્ટર્ડ 10 અંકનો મોબાઈલ નંબર દાખલ કરો:` 
-                : `Enter your registered 10-digit mobile number to remove your name:`
-            );
-
-            if (confirmPhone === donor.phone) {
+            const confirmPin = prompt(currentLang === 'GU' ? "4 અંકનો સિક્રેટ PIN અથવા Admin Master PIN નાખો:" : "Enter 4-digit secret PIN or Admin Master PIN:");
+            if (confirmPin === donor.pin || confirmPin === MASTER_PIN) {
                 donors.splice(index, 1);
+                saveData();
                 filterDonors();
-                alert(currentLang === 'GU' ? "તમારું નામ સફળતાપૂર્વક હટાવી દેવામાં આવ્યું છે." : "Your registration has been removed successfully.");
-            } else if (confirmPhone !== null) {
-                alert(currentLang === 'GU' ? "ખોટો મોબાઈલ નંબર! નામ હટાવી શકાયું નથી." : "Incorrect mobile number! Cannot remove entry.");
+                alert(currentLang === 'GU' ? "નામ હટાવી દેવામાં આવ્યું છે." : "Donor removed successfully.");
+            } else if (confirmPin !== null) {
+                alert(currentLang === 'GU' ? "ખોટો PIN!" : "Incorrect PIN!");
             }
         }
 
@@ -738,37 +2306,132 @@
             e.preventDefault();
             const name = document.getElementById("fullName").value.trim();
             const blood = document.getElementById("bloodGroup").value;
-            const area = document.getElementById("area").value;
-            const phone = document.getElementById("phone").value;
-
-            // English અક્ષરો ચકાસવા માટે Validation
-            const englishRegex = /^[A-Za-z\s]+$/;
-            if (!englishRegex.test(name)) {
-                alert(currentLang === 'GU' ? "કૃપા કરીને તમારું નામ ફક્ત English અક્ષરોમાં જ લખો." : "Please enter your name in English letters only.");
-                return;
+            const areaSelect = document.getElementById("area");
+            
+            let area = areaSelect.value;
+            // Check if "Other" is selected, take value from input box instead
+            if (area === 'અન્ય / આસપાસનો વિસ્તાર') {
+                area = document.getElementById("customArea").value.trim();
             }
 
-            donors.push({ name, blood, area, phone });
-            filterDonors();
+            const phone = document.getElementById("phone").value;
+            const pin = document.getElementById("donorPin").value;
 
-            alert(currentLang === 'GU' ? "રજિસ્ટ્રેશન સફળ રહ્યું!" : "Registration Successful!");
+            donors.push({ name, blood, area, phone, pin });
+            saveData();
+            filterDonors();
+            alert(currentLang === 'GU' ? "રજીસ્ટ્રેશન સફળ રહ્યું!" : "Registration successful!");
+            
+            // Reset form and hide custom input
             document.getElementById("donorForm").reset();
+            document.getElementById("customArea").style.display = 'none';
+            document.getElementById("customArea").required = false;
+
             showPage('donors');
         });
 
+        // Filter Function
         function filterDonors() {
             const selectedGroup = document.getElementById("searchBlood").value;
-            if (selectedGroup === "ALL") {
-                displayDonors(donors);
-            } else {
-                const filtered = donors.filter(d => d.blood === selectedGroup);
-                displayDonors(filtered);
+            const selectedArea = document.getElementById("searchArea").value;
+
+            let filtered = donors;
+
+            if (selectedGroup !== "ALL") {
+                filtered = filtered.filter(d => d.blood === selectedGroup);
+            }
+            if (selectedArea !== "ALL") {
+                filtered = filtered.filter(d => d.area === selectedArea);
+            }
+
+            displayDonors(filtered);
+        }
+
+        // Display Camps
+        function displayCamps() {
+            const gridBody = document.getElementById("campCardsGrid");
+            gridBody.innerHTML = "";
+            
+            if (camps.length === 0) {
+                const emptyMsg = currentLang === 'GU' ? 'હાલમાં કોઈ આગામી કેમ્પ રજીસ્ટર થયેલ નથી.' : 'No upcoming camps registered.';
+                gridBody.innerHTML = `<div style="text-align:center; color:#777; padding: 40px; grid-column: 1 / -1; background: #fafafa; border-radius: 12px; font-weight: bold;">${emptyMsg}</div>`;
+                return;
+            }
+            
+            camps.forEach((c, index) => {
+                const maskedPhone = "******" + c.phone.slice(6);
+                const lblAddress = currentLang === 'GU' ? 'સરનામું:' : 'Address:';
+                const lblDays = currentLang === 'GU' ? 'દિવસો:' : 'Days:';
+                
+                gridBody.innerHTML += `
+                    <div class="camp-card">
+                        <div class="camp-card-header">
+                            <h3 class="camp-org" title="${c.orgName}">${c.orgName}</h3>
+                            <span class="camp-date-badge">📅 ${c.date}</span>
+                        </div>
+                        <div class="camp-card-body">
+                            <div class="camp-detail">
+                                <span class="camp-detail-icon">📍</span>
+                                <span><strong>${lblAddress}</strong> <br>${c.address}</span>
+                            </div>
+                            <div class="camp-detail">
+                                <span class="camp-detail-icon">⏳</span>
+                                <span><strong>${lblDays}</strong> ${c.days} Day(s)</span>
+                            </div>
+                            <div class="camp-card-actions">
+                                <a href="tel:${c.phone}" class="btn-call-camp">📞 Call: ${maskedPhone}</a>
+                                <button onclick="removeCamp(${index})" class="btn-delete-camp" title="Remove Camp">🗑️</button>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        document.getElementById("campForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const orgName = document.getElementById("orgName").value.trim();
+            const address = document.getElementById("campAddress").value.trim();
+            const days = document.getElementById("campDays").value;
+            const date = document.getElementById("campDate").value;
+            const phone = document.getElementById("campPhone").value;
+            const pin = document.getElementById("campPin").value;
+
+            camps.push({ orgName, address, days, date, phone, pin });
+            saveData();
+            displayCamps();
+            alert(currentLang === 'GU' ? "કેમ્પ સફળતાપૂર્વક રજીસ્ટર થઈ ગયો છે!" : "Camp registered successfully!");
+            document.getElementById("campForm").reset();
+        });
+
+        function removeCamp(index) {
+            const c = camps[index];
+            const confirmPin = prompt(currentLang === 'GU' ? "આયોજકનો 4 અંકનો સિક્રેટ PIN અથવા Admin Master PIN નાખો:" : "Enter 4-digit secret PIN or Admin Master PIN:");
+            if (confirmPin === c.pin || confirmPin === MASTER_PIN) {
+                camps.splice(index, 1);
+                saveData();
+                displayCamps();
+                alert(currentLang === 'GU' ? "કેમ્પ હટાવી દેવાયો છે." : "Camp removed.");
+            } else if (confirmPin !== null) {
+                alert(currentLang === 'GU' ? "ખોટો PIN!" : "Incorrect PIN!");
             }
         }
 
+        window.addEventListener('click', function(event) {
+            let welcomeModal = document.getElementById('welcomeModal');
+            let serviceModal = document.getElementById('serviceModal');
+            
+            if (event.target == welcomeModal) {
+                welcomeModal.classList.remove('active');
+            }
+            if (event.target == serviceModal) {
+                serviceModal.classList.remove('active');
+            }
+        });
+
         window.onload = function() {
             displayDonors(donors);
+            displayCamps();
         };
     </script>
 </body>
-</html>
+</html> 		
